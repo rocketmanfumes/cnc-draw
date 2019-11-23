@@ -26,7 +26,7 @@ public:
     y0 = milliToSteps(yf);
   }
   void drawLine(float xf1, float yf1, Stream &stream);
-  void drawArc(float cx, float cy, float x, float y, float dir, Stream &stream);
+  void drawArc(float cx, float cy, float x, float y, int dir, Stream &stream);
 };
 
 #endif // _GCODE_RUNNER_H_

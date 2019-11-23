@@ -59,7 +59,7 @@ static float atan3(float dy, float dx) {
 // x/y - end position
 // dir - ARC_CW or ARC_CCW to control direction of arc
 // (posx,posy,posz) is the starting position
-void DrawState::drawArc(float x, float y, float gi, float gj, float dir,
+void DrawState::drawArc(float x, float y, float gi, float gj, int dir,
                         Stream &stream) {
   float posx = stepsToMillis(x0);
   float posy = stepsToMillis(y0);
@@ -81,8 +81,10 @@ void DrawState::drawArc(float x, float y, float gi, float gj, float dir,
 
   sweep = angle2 - angle1;
 
-  if (dir > 0 && sweep < 0) {
+  if (dir == ARC_CCW && sweep < 0) {
     sweep = 2 * M_PI + sweep;
+  } else if (dir == ARC_CW && sweep > 0) {
+    sweep = -2 * M_PI + sweep;
   }
 
   // get length of arc
